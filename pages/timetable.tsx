@@ -8,8 +8,8 @@ import Table from '../components/table'
 import TTElementModal from '../components/TTElementModal'
 
 function Timetable() {
-  const [rows, setrows] = useState(3)
-  const [cols, setcols] = useState(3)
+  const [rows, setrows] = useState(0)
+  const [cols, setcols] = useState(0)
   const [open, setopen] = useRecoilState(DimensionModalState)
 
   return (
@@ -47,7 +47,7 @@ function Timetable() {
               setrows={setrows}
               setcols={setcols}
             />
-            <TTElementModal />
+            {/* <TTElementModal /> */}
           </div>
         </div>
       </div>

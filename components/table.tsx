@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CogIcon } from '@heroicons/react/outline'
 import { useState } from 'react'
 import TableElement from './tableElement'
@@ -10,11 +10,30 @@ interface Props {
   cols: number
 }
 const startdata = 
-  {title:'',detail:'',timestamp:'',homework:[{title:'',desc:'',completed:false}]}
+  {title:'hi',detail:'test',timestamp:'',homework:[{title:'',desc:'',completed:false}]}
 
 function Table({ rows, cols }: Props) {
   const [open, setopen] = useRecoilState(DimensionModalState)
   const [data, setdata] = useState(startdata)
+
+  const [table, settable] = useState([[startdata]])
+
+  // DELETE WHEN ADDING FIREBASE
+  const maketable=()=>{
+    let tables = []
+    for (let i = 0; i < rows; i++) {
+      let row = []
+      for (let j = 0; j < cols; j++) {
+        row.push(startdata)        
+      }
+      tables.push(row)
+    }
+    settable(tables)
+  }
+
+  useEffect(() => {
+     maketable()
+  }, [rows,cols])
 
   return (
     <div className="">
@@ -27,10 +46,10 @@ function Table({ rows, cols }: Props) {
         </div>
       ) : (
         <div className="">
-          {[...Array(rows)].map((i) => (
+          {table.map((i) => (
             <div className="flex">
-              {[...Array(rows).fill(startdata)].map((i) => (
-                <TableElement {...i} rows={rows} cols={cols} />
+              {i.map((j) => (
+                <TableElement {...j} rows={rows} cols={cols} />
               ))}
             </div>
           ))}

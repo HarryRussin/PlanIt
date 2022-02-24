@@ -11,15 +11,16 @@ import { TTEinfoState, TTElementModalState } from '../atoms/modelAtom'
 import { Dialog, Transition, Switch } from '@headlessui/react'
 import Homework from './homework'
 
-function TTElementModal({ rows, cols, setrows, setcols }: any) {
+function TTElementModal({ info,setinfo,completed,setcompleted }: any) {
   const [open, setopen] = useRecoilState(TTElementModalState)
-  const [info, setinfo] = useRecoilState(TTEinfoState)
   const [showmore, setshowmore] = useState(true)
-  const [completed, setcompleted] = useState(false)
 
   const [hwTitle, sethwTitle] = useState('')
   const [hwDesc, sethwDesc] = useState('')
-  const titleRef = useRef(null)
+  const [title, settitle] = useState('')
+  const [details, setdetails] = useState('')
+
+  console.log(info);
 
   const addHw = () => {
     if(hwTitle===''){return}
@@ -30,6 +31,14 @@ function TTElementModal({ rows, cols, setrows, setcols }: any) {
     sethwDesc('')
     sethwTitle('')
     setcompleted(false)
+  }
+
+  const saveAll = ()=>{
+    let infos = JSON.parse(JSON.stringify(info))
+    infos.title = title
+    infos.detail = details
+    setinfo(infos)
+    console.log(info);
   }
 
   return (
@@ -65,12 +74,12 @@ function TTElementModal({ rows, cols, setrows, setcols }: any) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className=" my-2 box-border h-[90vh] inline-block mx-auto transform rounded bg-white p-6 text-left transition-all">
+            <div className=" my-2 inline-block box-border h-[90vh] mx-auto transform rounded bg-white p-6 text-left transition-all">
               <div
                 onClick={() => setopen(false)}
-                className=" absolute -right-4 top-0 z-10 rounded-b-xl bg-gray-300 pt-1 transition-all hover:pt-2 active:pt-4"
+                className=" absolute -right-4 top-0 z-10 rounded-full bg-gray-300 pt-1 transition-all active:p-2"
               >
-                <XIcon className=" h-8 w-16 text-2xl" />
+                <XIcon className=" h-8 w-16 text-2xl hover:scale-90 transition-all" />
               </div>
               <div className="flex justify-between space-x-5">
                 <div className="">
@@ -82,26 +91,28 @@ function TTElementModal({ rows, cols, setrows, setcols }: any) {
                     <PencilIcon className="absolute top-1.5 left-0 h-8 w-8" />
                     <input
                       className="mx-8 appearance-none rounded border-2 pl-1 pt-0 border-black outline-none placeholder:text-black"
+                      onChange={(e)=>setdetails(e.target.value)}
                       placeholder={info.title}
-                      ref={titleRef}
                     />
                   </Dialog.Title>
                   <div className="mx-8 mt-2">
                     <h2 className="">Description</h2>
                     <textarea
+                      onChange={(e)=>settitle(e.target.value)}
                       rows={3}
                       placeholder={info.detail}
                       className="w-full appearance-none rounded border-2 border-black p-0 text-lg outline-none placeholder:text-black focus:border-black focus:outline-none focus:ring-0"
                     />
+                    <button onClick={saveAll} className='w-full bg-cyan-500 p-1 rounded-md font-bold text-black'>Save</button>
                   </div>
                 </div>
               <div className="w-[50vw] border p-4">
                 <h3 className=" text-3xl">Homework</h3>
                 <hr className='m-2'/>
-                <div className=" mt-2 flex flex-col p-2 ">
+                <div className=" mt-2 flex flex-col p-2">
                   <div className="overflow-y-auto max-h-[30vh] scrollbar-thin scrollbar z-10 scrollbar-thumb-gray-500">
                     {info.homework.map((item) => (
-                      <Homework {...item}/>
+                      <Homework {...item} setcompleted={setcompleted}/>
                     ))}
                   </div>
                   <hr className='my-2'/>
