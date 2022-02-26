@@ -1,7 +1,7 @@
 import { MinusIcon, PlusIcon } from '@heroicons/react/outline'
 import { Fragment, useRef, useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { DimensionModalState } from '../atoms/modelAtom'
+import { DimensionModalState } from '../../atoms/modelAtom'
 import { Dialog, Transition } from '@headlessui/react'
 
 function SettingsModal({ rows, cols, setrows, setcols }: any) {

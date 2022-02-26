@@ -1,9 +1,9 @@
 import NextAuth from "next-auth/next";
-import GoogleProfider from 'next-auth/providers/google'
+import GoogleProvider from 'next-auth/providers/google'
 
-NextAuth({
+export default NextAuth({
     providers:[
-        GoogleProfider({
+        GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET
         })
@@ -13,7 +13,7 @@ NextAuth({
         signIn: '/auth/signin'
     },
     callbacks:{
-        async session({session,token,user}){
+        async session({session,token}){
             session.user.username = session.user.name.split(' ').join('').toLocaleLowerCase()
             session.user.uid = token.sub
             return session

@@ -7,20 +7,20 @@ import {
 } from '@heroicons/react/solid'
 import { Fragment, useRef, useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { TTEinfoState, TTElementModalState } from '../atoms/modelAtom'
+import { TTEinfoState, TTElementModalState } from '../../atoms/modelAtom'
 import { Dialog, Transition, Switch } from '@headlessui/react'
 import Homework from './homework'
 
-function TTElementModal({ info,setinfo,completed,setcompleted }: any) {
+function TTElementModal() {
   const [open, setopen] = useRecoilState(TTElementModalState)
-  const [showmore, setshowmore] = useState(true)
+  const [info, setinfo] = useRecoilState(TTEinfoState)
 
+  const [showmore, setshowmore] = useState(true)
   const [hwTitle, sethwTitle] = useState('')
   const [hwDesc, sethwDesc] = useState('')
   const [title, settitle] = useState('')
   const [details, setdetails] = useState('')
-
-  console.log(info);
+  const [completed, setcompleted] = useState(false)
 
   const addHw = () => {
     if(hwTitle===''){return}
@@ -38,7 +38,6 @@ function TTElementModal({ info,setinfo,completed,setcompleted }: any) {
     infos.title = title
     infos.detail = details
     setinfo(infos)
-    console.log(info);
   }
 
   return (
@@ -112,7 +111,7 @@ function TTElementModal({ info,setinfo,completed,setcompleted }: any) {
                 <div className=" mt-2 flex flex-col p-2">
                   <div className="overflow-y-auto max-h-[30vh] scrollbar-thin scrollbar z-10 scrollbar-thumb-gray-500">
                     {info.homework.map((item) => (
-                      <Homework {...item} setcompleted={setcompleted}/>
+                      <Homework {...item}/>
                     ))}
                   </div>
                   <hr className='my-2'/>
