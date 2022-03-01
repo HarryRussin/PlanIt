@@ -29,7 +29,7 @@ const startdata = {
 
 function Table({ rows, cols, tableId, dimensions }: Props) {
   const [open, setopen] = useRecoilState(DimensionModalState)
-  const [table, settable] = useRecoilState(TableState)
+  const [table, settable] = useRecoilState<any>(TableState)
   const [tableData, settableData] = useState<any>()
 
   const [data, setdata] = useState(startdata)
@@ -97,7 +97,7 @@ function Table({ rows, cols, tableId, dimensions }: Props) {
       })
       tables.push(row)
     }
-    tables = tables.filter((n):any => n.length)
+    tables = tables.filter((n:any) => n.length)
     console.log('table got - ', tables)
 
     settableData(tables)
@@ -136,7 +136,7 @@ function Table({ rows, cols, tableId, dimensions }: Props) {
             </div>
           ) : (
             <div className="">
-              {Object.keys(table).map((_, i) => (
+              {Object.keys(table).map((_:any, i):any => (
                 <div className="flex">
                   {table[_].map((s: any, j: number) => (
                     <TableElement
