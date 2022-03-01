@@ -35,8 +35,6 @@ function Table({ rows, cols, tableId, dimensions }: Props) {
   const [data, setdata] = useState(startdata)
   const [loading, setloading] = useState(false)
 
-  const { data: session } = useSession()
-
   //ADDS TABLE ELEMENTS AND ROWS
   const maketable = async () => {
     // copy existing table
@@ -99,7 +97,7 @@ function Table({ rows, cols, tableId, dimensions }: Props) {
       })
       tables.push(row)
     }
-    tables = tables.filter((n) => n.length)
+    tables = tables.filter((n):any => n.length)
     console.log('table got - ', tables)
 
     settableData(tables)

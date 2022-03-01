@@ -8,13 +8,15 @@ function NewTableModal({ setopen, open }: any) {
   const [title, settitle] = useState('')
   const [detail, setdetail] = useState('')
 
-  const {data:session} = useSession()
+  const {data:session}:any = useSession()
+
+  const userid = session?.user?.uid
 
   const addTable = async ()=>{
     const docRef = await addDoc(collection(db, 'tables'), {
         title: title,
         details: detail,
-        createdBy: session?.user?.uid,
+        createdBy: userid,
         timestamp: serverTimestamp(),
         dimensions:{rows:0,cols:0}
       })

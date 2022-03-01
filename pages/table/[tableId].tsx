@@ -19,8 +19,6 @@ function Timetable({tableData}:{tableData:TableType}) {
   const [rows, setrows] = useState(tableData.dimensions.rows)
   const [cols, setcols] = useState(tableData.dimensions.cols)
   const [open, setopen] = useRecoilState(DimensionModalState)
-  const { data: session } = useSession()
-  const router = useRouter()
 
   return (
     <div>
