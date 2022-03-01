@@ -18,6 +18,8 @@ import { useSetRecoilState } from 'recoil'
 
 interface Table {
   title: string
+  details:string
+  id:string
 }
 
 function TableIndex() {
@@ -25,7 +27,7 @@ function TableIndex() {
   const [open, setopen] = useState(false)
   const settable = useSetRecoilState(TableState)
 
-  const { data: session } = useSession()
+  const { data: session }:any = useSession()
 
   const uid = session ? session?.user?.uid : ''
 
