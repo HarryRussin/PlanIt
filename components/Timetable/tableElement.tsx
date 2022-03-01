@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { TTEinfoState, TTElementModalState, TTElementPosState } from '../../atoms/modelAtom'
 import { Props } from '../../typings'
-import TTElementModal from './TTElementModal'
 
 function TableElement({ rows, cols,title,detail,homework,timestamp,position}: Props) {
   const [open, setopen] = useRecoilState(TTElementModalState)
@@ -10,7 +9,7 @@ function TableElement({ rows, cols,title,detail,homework,timestamp,position}: Pr
   const [pos, setpos] = useRecoilState(TTElementPosState)
   const [completed, setcompleted] = useState(false)
 
-  let infos = {title:title,timestamp:timestamp,detail:detail,homework:homework}
+  let infos:any = {title:title,timestamp:timestamp,detail:detail,homework:homework}
   
   return (
     <div
