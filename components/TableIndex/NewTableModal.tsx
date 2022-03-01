@@ -1,7 +1,4 @@
-import { MinusIcon, PlusIcon } from '@heroicons/react/outline'
-import { Fragment, useRef, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { DimensionModalState } from '../../atoms/modelAtom'
+import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '../../firebase'

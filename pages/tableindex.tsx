@@ -12,6 +12,9 @@ import Header from '../components/header'
 import IndexTable from '../components/TableIndex/indexTable'
 import NewTableModal from '../components/TableIndex/NewTableModal'
 import { db } from '../firebase'
+import {TableState} from '../atoms/modelAtom.js'
+import { useSetRecoilState } from 'recoil'
+
 
 interface Table {
   title: string
@@ -20,6 +23,7 @@ interface Table {
 function TableIndex() {
   const [tables, settables] = useState<[Table] | []>([])
   const [open, setopen] = useState(false)
+  const settable = useSetRecoilState(TableState)
 
   const { data: session } = useSession()
 
@@ -43,6 +47,10 @@ function TableIndex() {
         }
       )
   }, [db,session])
+
+  useEffect(() => {
+     settable([])
+  }, [])
 
   return (
     <div>

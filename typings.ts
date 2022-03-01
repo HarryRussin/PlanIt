@@ -4,6 +4,7 @@ export interface Props {
   title: string
   detail: string
   timestamp: string
+  position:[number,number]
   homework: Homework[]
 }
 
@@ -17,5 +18,5 @@ export interface TableType{
     title:string
     details:string
     id:string
-    dimensions:string
+    dimensions:{rows:number,cols:number}
 }

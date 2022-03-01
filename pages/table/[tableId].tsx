@@ -2,7 +2,7 @@ import { CogIcon } from '@heroicons/react/outline'
 import { collection, doc, getDoc, onSnapshot, query } from 'firebase/firestore'
 import { GetServerSideProps, GetStaticProps } from 'next'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
@@ -53,7 +53,7 @@ function Timetable({tableData}:{tableData:TableType}) {
               setrows={setrows}
               setcols={setcols}
             />
-            <TTElementModal />
+            <TTElementModal tableId={tableData.id}/>
           </div>
         </div>
       </div>

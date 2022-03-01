@@ -1,23 +1,20 @@
 import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { TTEinfoState, TTElementModalState } from '../../atoms/modelAtom'
+import { TTEinfoState, TTElementModalState, TTElementPosState } from '../../atoms/modelAtom'
 import { Props } from '../../typings'
 import TTElementModal from './TTElementModal'
 
-
-
-
-
-function TableElement({ rows, cols,title,detail,homework,timestamp}: Props) {
+function TableElement({ rows, cols,title,detail,homework,timestamp,position}: Props) {
   const [open, setopen] = useRecoilState(TTElementModalState)
   const [TTEinfo, setTTEinfo] = useRecoilState(TTEinfoState)
+  const [pos, setpos] = useRecoilState(TTElementPosState)
   const [completed, setcompleted] = useState(false)
 
   let infos = {title:title,timestamp:timestamp,detail:detail,homework:homework}
   
   return (
     <div
-    onClick={()=>{setopen(true);setTTEinfo(infos)}}
+    onClick={()=>{setopen(true);setTTEinfo(infos);setpos(position)}}
       style={{
         height: 70 / rows + 'vh',
         width: 70 / cols + 'vw',
