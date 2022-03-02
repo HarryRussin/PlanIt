@@ -14,16 +14,10 @@ import NewTableModal from '../components/TableIndex/NewTableModal'
 import { db } from '../firebase'
 import {TableState} from '../atoms/modelAtom.js'
 import { useSetRecoilState } from 'recoil'
-
-
-interface Table {
-  title: string
-  details:string
-  id:string
-}
+import { TableType } from '../typings'
 
 function TableIndex() {
-  const [tables, settables] = useState<[Table] | []>([])
+  const [tables, settables] = useState<[TableType] | []>([])
   const [open, setopen] = useState(false)
   const settable = useSetRecoilState(TableState)
 
